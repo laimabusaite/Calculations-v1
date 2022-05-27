@@ -107,7 +107,7 @@ if __name__ == '__main__':
     max_amplitude = parameters_dataframe[parameters_dataframe['amplitude'] == max(parameters_dataframe['amplitude'])]
     print(max_amplitude)
 
-    plt.plot(parameters_dataframe['slope'], label=f"{parameters_dataframe[['D line','Bdirection','transition'] ]}")
+    plt.plot(parameters_dataframe['amplitude'], label=f"{parameters_dataframe[['D line','Bdirection','transition'] ]}")
 
     plt.legend()
     plt.show()
