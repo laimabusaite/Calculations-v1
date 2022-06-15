@@ -126,7 +126,7 @@ def plotRabiDependence(Bdirection, rabiList, transitionList, probeList=None, dli
             #                    f'Pump_{transition}-theta=0.79-phi=1.57-pol=0-det=0_Probe_{transition}-det=0/' \
             #                    f'Absorption_theta=1.57-0.79_phi=0.79-1.57_pol=0-0_gammaprobe=0.0190_lWidthpr=2.0/' \
             #                    f'Absorption_Cs133-D{dline}-PumpRabi={rabi:.2f}-shift=0.0-Ge=0'
-            theorPath = dir0 + f'D{dline}pump{Bdirection}_probe/Pump_D{dline}-Cs133_Probe_D{dline}-Cs133/' \
+            theorPath = dir0 + f'D{dline}pump{Bdirection}_compensation/Pump_D{dline}-Cs133_Probe_D{dline}-Cs133/' \
                                f'gamma=0.0190-DSteps=150-DScan=2.00sigma-lWidth=2.0/' \
                                f'Pump_{transition}-theta={theta_exc:.2f}-phi={phi_exc:.2f}-pol={pol_exc:1d}-det=0_Probe_{transition}-det=0/' \
                                f'Absorption_theta={theta_obs1:.2f}-{theta_obs2:.2f}_phi={phi_obs1:.2f}-{phi_obs2:.2f}_pol={pol_obs1:1d}-{pol_obs2:1d}_gammaprobe=0.0190_lWidthpr=2.0/' \
@@ -184,44 +184,44 @@ def plotRabiDependence(Bdirection, rabiList, transitionList, probeList=None, dli
             # Normalize data
             # max_neg = theorData['comp1']
 
-            plt.plot(x, y, marker='o', label=rabi)
+            plt.plot(x, -y, marker='o', label=rabi)
             # plt.plot(x, theorData[condition]['comp1_smooth']/max_norm, label=rabi)
             plt.legend()
 
 
 if __name__ == '__main__':
-    rabiList = [0.0, 0.1, 0.5, 1, 5]  # , 10, 20, 50, 100]
+    rabiList = [0.0, 0.1, 0.5, 1, 2, 5]  # , 10, 20, 50, 100]
     # rabiList = [0.5, 1, 5]
     transitionList = ['4-3']  # ['3-3', '3-4', '4-4', '4-3']
     probeList = ['4-3']  # ['3-3', '3-4', '4-4', '4-3']
     x_range = 10
 
-    excitation_params = {'theta': 1.57, 'phi': 0.79, 'pol': 0}
-    observation1 = {'theta': 1.57, 'phi': 0.79, 'pol': 0}  # 0 deg
-    observation2 = {'theta': 0.79, 'phi': 1.57, 'pol': 0}  # 60 deg
+    excitation_params = {'theta': 0, 'phi': 0., 'pol': 0}
+    observation1 = {'theta': 0, 'phi': 0, 'pol': 0}
+    observation2 = {'theta': 1.57, 'phi': 1.57, 'pol': 0}
 
     # plotRabiDependence('Bx', rabiList, transitionList, probeList, x_range=2, comp='comp1')
-    plotRabiDependence('Bx', rabiList, transitionList, probeList, x_range=x_range, comp='comp1',
+    plotRabiDependence('Bz', rabiList, transitionList, probeList, x_range=x_range, comp='comp1',
                        excitation_params=excitation_params, observation1=observation1, observation2=observation2)
 
-    plotRabiDependence('Bx', rabiList, transitionList, probeList, x_range=x_range, comp='comp2',
-                       excitation_params=excitation_params, observation1=observation1, observation2=observation2)
-
-    plotRabiDependence('Bx', rabiList, transitionList, probeList, x_range=x_range, comp='Total',
-                       excitation_params=excitation_params, observation1=observation1, observation2=observation2)
-
-    excitation_params = {'theta': 1.57, 'phi': 0.79, 'pol': 0}
-    observation1 = {'theta': 0.9553166181245093, 'phi': 1.3089969389957472, 'pol': 0}  # 45 deg
-    observation2 = {'theta': 0.6154797086703874, 'phi': 2.356194490192345, 'pol': 0}  # 60 deg
-
-    # plotRabiDependence('Bx', rabiList, transitionList, probeList, x_range=2, comp='comp1')
-    plotRabiDependence('Bx', rabiList, transitionList, probeList, x_range=x_range, comp='comp1',
-                       excitation_params=excitation_params, observation1=observation1, observation2=observation2)
-
-    plotRabiDependence('Bx', rabiList, transitionList, probeList, x_range=x_range, comp='comp2',
-                       excitation_params=excitation_params, observation1=observation1, observation2=observation2)
-
-    plotRabiDependence('Bx', rabiList, transitionList, probeList, x_range=x_range, comp='Total',
-                       excitation_params=excitation_params, observation1=observation1, observation2=observation2)
+    # plotRabiDependence('Bz', rabiList, transitionList, probeList, x_range=x_range, comp='comp2',
+    #                    excitation_params=excitation_params, observation1=observation1, observation2=observation2)
+    #
+    # plotRabiDependence('Bz', rabiList, transitionList, probeList, x_range=x_range, comp='Total',
+    #                    excitation_params=excitation_params, observation1=observation1, observation2=observation2)
+    #
+    # excitation_params = {'theta': 1.57, 'phi': 0.79, 'pol': 0}
+    # observation1 = {'theta': 0.9553166181245093, 'phi': 1.3089969389957472, 'pol': 0}  # 45 deg
+    # observation2 = {'theta': 0.6154797086703874, 'phi': 2.356194490192345, 'pol': 0}  # 60 deg
+    #
+    # # plotRabiDependence('Bx', rabiList, transitionList, probeList, x_range=2, comp='comp1')
+    # plotRabiDependence('Bx', rabiList, transitionList, probeList, x_range=x_range, comp='comp1',
+    #                    excitation_params=excitation_params, observation1=observation1, observation2=observation2)
+    #
+    # plotRabiDependence('Bx', rabiList, transitionList, probeList, x_range=x_range, comp='comp2',
+    #                    excitation_params=excitation_params, observation1=observation1, observation2=observation2)
+    #
+    # plotRabiDependence('Bx', rabiList, transitionList, probeList, x_range=x_range, comp='Total',
+    #                    excitation_params=excitation_params, observation1=observation1, observation2=observation2)
 
     plt.show()
